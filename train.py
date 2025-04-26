@@ -25,7 +25,7 @@ X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random
 ####################################
 
 # Fit the model on the train data
-regr = RandomForestClassifier(max_depth=2, random_state=seed)
+regr = RandomForestClassifier(max_depth=5, random_state=seed)
 regr.fit(X_train, y_train)
 
 # Report Training set score
