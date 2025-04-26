@@ -20,6 +20,3 @@ jobs:
       - name: Write CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "This is a test report." > report.md
-          cml comment create report.md
