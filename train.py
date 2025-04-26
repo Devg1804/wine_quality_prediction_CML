@@ -1,45 +1,40 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import seaborn as sns 
-
-# Set Random Seed
+from sklearn.ensemble import RandomForestRegressor
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+# Set random seed
 seed = 42
 
-####################################
-########### DATA PREP ##############
-####################################
+################################
+########## DATA PREP ###########
+################################
 
 # Load in the data
-df = pd.read_csv('wine_quality.csv')
+df = pd.read_csv("wine_quality.csv")
 
-# Split into train and test data
+# Split into train and test sections
 y = df.pop("quality")
 X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random_state=seed)
 
+#################################
+########## MODELLING ############
+#################################
 
-####################################
-########### MODELING ###############
-####################################
-
-# Fit the model on the train data
-
-regr = RandomForestClassifier(max_depth=5 random_state=seed)
-
+# Fit a model on the train section
+regr = RandomForestRegressor(max_depth=5, random_state=seed)
 regr.fit(X_train, y_train)
 
-# Report Training set score
+# Report training set score
 train_score = regr.score(X_train, y_train) * 100
 # Report test set score
 test_score = regr.score(X_test, y_test) * 100
 
-
-# Writ score to a file
-with open("metrics.txt", 'w') as file:
-    file.write('Training variance explained: %2.1f%%\n' % train_score)
-    file.write('Test variance explained: %2.1f%%\n' % test_score)
+# Write scores to a file
+with open("metrics.txt", 'w') as outfile:
+        outfile.write("Training variance explained: %2.1f%%\n" % train_score)
+        outfile.write("Test variance explained: %2.1f%%\n" % test_score)
 
 
 ##########################################
@@ -64,6 +59,7 @@ ax.set_title('Random forest\nfeature importance', fontsize = title_fs)
 plt.tight_layout()
 plt.savefig("feature_importance.png",dpi=120) 
 plt.close()
+
 
 ##########################################
 ############ PLOT RESIDUALS  #############
